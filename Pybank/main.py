@@ -1,7 +1,8 @@
 import os
 import csv
 
-budget_data_csv = os.path.join('Resources', 'budget_data.csv')
+budget_data_csv = os.path.join("Resources", "budget_data.csv")
+
 
 def run_analysis(data):
     information = []
@@ -34,16 +35,25 @@ def run_analysis(data):
             month_decrease = info[0]
     average = round(change / (months - 1), 2)
 
-    print('Financial Analysis')
+    print('Financial Analysis\n')
     for i in range(20):
         print('-', end='')
-    print('\nTotal Months: ' + str(months))
-    print('Total: $' + str(total_budget))
-    print('Average Change: $' + str(average))
-    print('Greatest Increase in Profits: ' + month_increase + ' ($' + str(greatest_increase) + ')')
-    print(f'Greatest Decrease in Profits: {month_decrease} (${greatest_decrease})')
+    print('\n\nTotal Months: ' + str(months))
+    print('\nTotal: $' + str(total_budget))
+    print('\nAverage Change: $' + str(average))
+    print('\nGreatest Increase in Profits: ' + month_increase + ' ($' + str(greatest_increase) + ')')
+    print(f'\nGreatest Decrease in Profits: {month_decrease} (${greatest_decrease})')
 
-with open(budget_data_csv, encoding='utf8') as csvfile:
+    with open(os.path.join('analysis', 'Financial_Analysis_Output.txt'), 'w') as output:
+        output.write('Financial Analysis\n')
+        output.write('------------------------------------\n')
+        output.write(f'Total Months: {months}\n')
+        output.write(f'Total: ${total_budget}\n')
+        output.write(f'Average Change: ${average}\n')
+        output.write(f'Greatest Increase in Profits: {month_increase} (${greatest_increase})\n')
+        output.write(f'Greatest Decrease in Profits: {month_decrease} (${greatest_decrease})\n')
+
+with open(budget_data_csv, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
     header = next(csvreader)
